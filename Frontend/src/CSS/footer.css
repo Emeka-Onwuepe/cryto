@@ -1,0 +1,9 @@
+footer {
+    background-color: #111111;
+    justify-content: center;
+}
+
+footer p {
+    text-align: center;
+    padding: 10px;
+}

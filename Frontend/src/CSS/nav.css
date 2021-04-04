@@ -1,0 +1,21 @@
+nav {
+    align-items: center
+}
+
+#logControl {
+    position: absolute;
+    top: 5px;
+    right: 4%;
+    background-color: #FF8D29;
+    padding: 4px;
+    color: black;
+}
+
+@media screen and (min-width:370px) {
+    nav {
+        align-self: end;
+    }
+    #logControl {
+        padding: 5px
+    }
+}
