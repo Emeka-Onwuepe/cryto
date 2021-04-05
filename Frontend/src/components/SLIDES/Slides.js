@@ -49,8 +49,8 @@ useEffect(() => {
 
     </div>
 <div className="banner" >
-            <img className="bannerImage" src={`static/CSS/${slideImage.url}`} alt="" />
-            <div style={{ backgroundImage: `url(static/CSS/${url})`, display: "none" }}></div>
+            <img className="bannerImage" src={`static/css/${slideImage.url}`} alt="" />
+            <div style={{ backgroundImage: `url(static/css/${url})`, display: "none" }}></div>
             <div className="bannertext">
             </div>
 
