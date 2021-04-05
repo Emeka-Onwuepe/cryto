@@ -150,6 +150,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+SECURE_CONTENT_TYPE_NOSNIFF = True
 
 
 # Static files (CSS, JavaScript, Images)
