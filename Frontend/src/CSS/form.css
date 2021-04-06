@@ -1,0 +1,72 @@
+.formDiv {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.formDiv h3 {
+    margin-top: 15px;
+}
+
+.formDiv button {
+    max-width: 175px;
+}
+
+.form {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin-top: 15px;
+}
+
+fieldset {
+    width: 50%;
+    border: none;
+    margin-top: 15px;
+}
+
+form h3 {
+    margin: 0px;
+    color: black;
+}
+
+input,
+textarea,
+select {
+    padding: 3px;
+    border: 3px solid #ffffff;
+    background-color: #222222;
+    color: white;
+}
+
+input,
+select {
+    margin-bottom: 10px;
+}
+
+input,
+select {
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+legend {
+    margin: 10px auto;
+    color: #9E9E9E;
+}
+
+label {
+    color: white;
+}
+
+.submitButton {
+    max-width: 200px;
+    margin: 15px auto;
+    padding: 3px;
+}
+
+.error {
+    color: red;
+    font-size: 16px;
+}

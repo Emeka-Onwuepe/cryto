@@ -1,15 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { NavLink } from 'react-router-dom';
 import "../../CSS/nav.css"
 
 function Nav(props) {
   return (
     <nav>
-      <a href="">About</a>
-      <a href="">Contact</a>
-      <a href="">FAQ</a>
-      <a href="">Rules</a>
-      <a id="logControl" href="">SIGN IN</a>
+
+    <NavLink to="about">About</NavLink>
+    <NavLink to="contact">Contact</NavLink>
+    <NavLink to="faq">FAQ</NavLink>
+    <NavLink to="rules">Rules</NavLink>
+    <a id="logControl" href="">SIGN IN</a>
 
     </nav>
   )

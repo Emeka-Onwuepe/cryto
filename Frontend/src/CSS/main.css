@@ -31,6 +31,20 @@ a {
     /* color: #0978c6 */
 }
 
+p {
+    color: white;
+    margin-bottom: 15px;
+}
+
+h1,
+h2,
+h3 {
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    color: #9E9E9E;
+}
+
 #app {
     width: 100%;
     box-sizing: border-box;

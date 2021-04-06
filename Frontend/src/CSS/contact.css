@@ -1,0 +1,23 @@
+.contact {
+    background-color: #222222;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    flex-direction: column;
+}
+
+.contactText {
+    align-self: center;
+    text-align: center;
+    margin-top: 15px;
+    color: white;
+}
+
+.contactText h2 {
+    color: #9E9E9E;
+    margin-bottom: 15px;
+}
+
+.contact p {
+    color: white;
+}

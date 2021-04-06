@@ -17,7 +17,7 @@ const Footer = (props) => {
         <div className="footerDiv">
             <footer>
                 <p style={{color:"white"}} id="footer"> Copyright &copy; <span id="footerdate" style={{ padding: "0%",color:"white" }}>{footerDate}</span>.
-             All rights reserved. AYPM.com <br /> Designed by CasTech. </p>
+             All rights reserved. Crytoglob.com <br /> Designed by CasTech. </p>
             </footer>
         </div>
     );
