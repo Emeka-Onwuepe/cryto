@@ -1,6 +1,13 @@
 import 'core-js/es/map';
 import 'core-js/es/set';
 import 'core-js/es/promise';
+import 'core-js/es/array';
+import 'core-js/features/array/from'; 
+import 'core-js/features/array/flat'; 
+import 'core-js/features/set';        
+import 'core-js/features/promise'; 
+import "core-js/features/array/join";
+import "core-js/es/array/join";
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider as AlertProvider } from 'react-alert';

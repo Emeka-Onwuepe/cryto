@@ -1,0 +1,13 @@
+.profileDetails {
+    background-color: #111111;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.profileDetails p {
+    margin: 0px;
+}

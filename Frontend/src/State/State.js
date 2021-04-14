@@ -15,7 +15,12 @@ export const LOADED = "LOADED";
 export const DELETE_USER = "DELETE_USER";
 export const DELETE_MESSAGES = "DELETE_MESSAGES";
 export const SEND_MAIL = "SEND_MAIL";
-export const SET_SCREEN_SIZE = "SET_SCREEN_SIZE"
+export const SET_SCREEN_SIZE = "SET_SCREEN_SIZE";
+export const GET_BTC_EXCHANGE = "GET_BTC_EXCHANGE";
+export const ADD_ERROR = "ADD_ERROR";
+export const REGISTER_USER ="RIGISTER_USER";
+export const GET_IP = "GET_IP";
+export const GET_ACCOUNT = "GET_ACCOUNT"
 
 //Actions dispatchers
 
@@ -80,12 +85,143 @@ export const sendMail = (data, config) => {
     })
 }
 
+export const RegisterUser = (data, config) => {
+    return axios.post('/api/register', data, config).then(res => {
+        return {
+            type: REGISTER_USER,
+            data: res.data,
+            messages: "Registered Successfully",
+            check: true
+        }
+    }).catch(err => {
+        return {
+            type: ADD_ERROR,
+            data: err.response.data,
+            status: err.response.status,
+        }
+
+    })
+}
+
+export const getExchange = () => {
+    console.log("ran from axios")
+    return axios.get('https://api.coinbase.com/v2/exchange-rates?currency=BTC').then(res => {
+        return {
+            type: GET_BTC_EXCHANGE,
+            data: res.data
+        }
+    })
+}
+
+export const getIp = (config) => {
+    return axios.get('/api/dashboard',config).then(res => {
+
+        return {
+            type: GET_IP,
+            data: res.data
+        }
+    }).catch(err => {
+        return {
+            type: ADD_ERROR,
+            data: err.response.data,
+            status: err.response.status,
+        }
+
+    })
+}
+
+export const DashBoard = (data,config,type) => {
+    return axios.post('/api/dashboard',data,config).then(res => {
+        switch (type) {
+            case GET_ACCOUNT:
+                return {
+                    type,
+                    withdraws: res.data.withdraws,
+                    deposits: res.data.deposits,
+                    account: res.data.account
+        }
+        }}).catch(err => {
+        return {
+            type: ADD_ERROR,
+            data: err.response.data,
+            status: err.response.status,
+        }
+
+    })
+}
+
+// Capitalise first word
+export const sentenceCase = (data) => {
+    let firstWord = data.slice(0, 1).toUpperCase()
+    let rest = data.slice(1).toLowerCase()
+    return `${firstWord}${rest}`
+}
+
+//add Commas
+
+export const addComas = (input) => {
+
+    const mutate = (array, result = []) => {
+        if (array.length < 3) {
+            if(array!=""){
+                result.push(array)
+            }
+            
+            return
+        }
+
+        const LastThree = array.slice(-3, )
+        result.push(LastThree)
+        const lastIndex = array.length - 3
+        const remaining = array.slice(0, lastIndex)
+        mutate(remaining, result)
+        return result
+    }
+
+    let result = ""
+    const [first, second] = input.split(".")
+    const firstNum = mutate(first)
+
+    if(firstNum !=undefined){
+        
+    const firstHalf = firstNum.reverse().join(",")
+
+    if (second == undefined) {
+        result = firstHalf
+    } else {
+        result = `${firstHalf}.${second}`
+    }
+}
+
+
+    return result
+
+}
+
 
 
 //Reducer
 const storeReducer = (state, action) => {
     console.log("dispatched", action)
     switch (action.type) {
+        case REGISTER_USER:
+              return {
+                 ...state,
+                 User: action.data,
+                messages: action.messages,
+                check: action.check,
+                logged: true,
+                loading: false,
+                }
+        case GET_ACCOUNT:
+            return{
+                ...state,
+                withdraws: action.withdraws,
+                deposits: action.deposits,
+                account: action.account,
+                loading:false,
+            }
+
         case CLEAR_SUCCESS:
             return {
                 ...state,
@@ -122,6 +258,20 @@ const storeReducer = (state, action) => {
                 messages: "",
                 loading: false,
                 logged: false,
+                check:false,
+                account:'',
+            }
+        case GET_BTC_EXCHANGE:
+            return {
+                ...state,
+                btcexchange: action.data,
+                loading: false,
+            }
+        case GET_IP:
+            return {
+                ...state,
+                ip: action.data.ip,
+                loading: false,
             }
         case ADD_ERROR:
             return {
@@ -172,6 +322,11 @@ const StoreContextProvider = (props) => {
                         success: false,
                         scrow: window.pageYOffset,
                         width: window.innerWidth,
+                        btcexchange: { data: { currency: {}, rates: {} } },
+                        ip:"",
+                        withdraws: [],
+                        deposits: [],
+                        account: [],
                         ...jsonify,
                         message: "",
                         status: "",
@@ -186,9 +341,14 @@ const StoreContextProvider = (props) => {
                         success: false,
                         scrow: window.pageYOffset,
                         width: window.innerWidth,
+                        btcexchange: { data: { currency: {}, rates: {} } },
+                        ip:"",
                         message: "",
                         status: "",
                         messages: "",
+                        withdraws: [],
+                        deposits: [],
+                        account: [],
                     }
                 }
                 return finaldata
@@ -206,8 +366,8 @@ const StoreContextProvider = (props) => {
                         scrow: window.pageYOffset
                     })
                 }
-                // window.addEventListener('resize', onresizer)
-                //            window.addEventListener('scroll', onresizer)
+                window.addEventListener('resize', onresizer)
+                window.addEventListener('scroll', onresizer)
 
             return () => {
 

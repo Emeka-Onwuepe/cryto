@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import "../CSS/package.css"
+import "../../CSS/package.css"
 
 function Package(props) {
   return (

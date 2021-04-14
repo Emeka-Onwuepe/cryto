@@ -11,7 +11,7 @@ nav {
     color: black;
 }
 
-@media screen and (min-width:370px) {
+@media screen and (min-width:470px) {
     nav {
         align-self: end;
     }

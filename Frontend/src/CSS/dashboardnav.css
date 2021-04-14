@@ -1,0 +1,12 @@
+.boardnav {
+    display: flex;
+    justify-content: center;
+    justify-content: center;
+    margin: 15px auto;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.boardnav a {
+    color: #FF8D29;
+}

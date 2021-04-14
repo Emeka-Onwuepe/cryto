@@ -1,0 +1,10 @@
+#login form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+}
+
+.signing {
+    display: flex;
+    gap: 40px;
+}

@@ -1,0 +1,20 @@
+.exchange {
+    background-color: #222222;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+.exchangerates {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    column-gap: 15px;
+}
+
+.exchangerates span {
+    color: #FF8D29
+}
+
+.headspan {
+    color: white;
+}
