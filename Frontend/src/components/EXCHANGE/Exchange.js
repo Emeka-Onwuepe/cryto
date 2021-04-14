@@ -40,25 +40,15 @@ function Exchange(props) {
         }    
     }
 
-    useEffect(() => {
-      const getRates = setInterval(() => {
-          getExchange().then(res=>storedispatch(res))
-      }, 3600000);
-
-      return () => {
-            clearInterval(getRates)
-        };
-
-    }, [])
 
     useEffect(() => {
-        console.log(displayRates)
-
+        console.log("ran inside interval")
+        getExchange().then(res=>storedispatch(res))
     }, [btcexchange])
 
   return (
     <div className="exchange">
-    <h3> BTC Exchange Rates <span className='headspan'>(updates every one hour)</span></h3>  
+    <h3> BTC Exchange Rates </h3>  
     <div className="exchangerates">
     {console.log(displayRates)}
     {displayRates.map((rate,index)=>rate)}
