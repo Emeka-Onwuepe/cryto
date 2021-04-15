@@ -66,6 +66,7 @@ class WithDraw(models.Model):
     amount = models.CharField(verbose_name="amount",max_length = 150)
     date = models.DateTimeField(auto_now=False, auto_now_add=False)
     pending = models.BooleanField(default=True)
+    success= models.BooleanField(default=False)
     
     
 
@@ -82,6 +83,7 @@ class Deposit(models.Model):
     amount = models.CharField(verbose_name="amount",max_length = 150)
     date = models.DateTimeField(auto_now=False, auto_now_add=False)
     pending = models.BooleanField(default=True)
+    success = models.BooleanField(default=False)
     
 
     def __str__(self):
