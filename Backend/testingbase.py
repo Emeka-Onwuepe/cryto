@@ -2,7 +2,6 @@ from coinbase.wallet.client import Client
 
 from coinbase_commerce.client import Client
 
-API_KEY = "9a21bc74-3fc0-4c7a-b714-6e5cf971e557"
 client = Client(api_key=API_KEY)
 
 # checkout_info = {
@@ -41,4 +40,4 @@ charge_info= {'name': 'FutexInvest',
 'local_price': {'amount': '1', 'currency': 'USD'}, 
 'pricing_type': 'fixed_price'}
 charge = client.charge.create(**charge_info)
-print(charge)
+print(charge["hosted_url"])

@@ -96,6 +96,6 @@ class DashBoard(generics.GenericAPIView):
             deposit= Deposit.objects.create(amount=recieved["amount"],date=charge["created_at"],
             chain_id=charge["id"],status=charge['timeline'][0]['status'])
             deposit=deposit.save()
-            return Response({"url":"hello"})
+            return Response({"url":charge["hosted_url"]})
 
 
