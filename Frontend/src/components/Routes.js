@@ -14,6 +14,7 @@ import RegisterAccount from './ACCOUNT/Register';
 import Login from "./ACCOUNT/Login"
 import Dashboard from './DASHBOARD/Dashboard';
 import DashBoardNav from './HEADER/DashBoardNav';
+import Deposit from './DASHBOARD/Deposit';
 
 
 const Routes = ({ component: component, ...rest }) => {
@@ -62,6 +63,11 @@ const Routes = ({ component: component, ...rest }) => {
             <Route exact path='/dashboard' >
                 <div className="wrapper">
                 <Dashboard/>
+                </div>
+            </Route>
+            <Route exact path='/dashboard/deposit' >
+                <div className="wrapper">
+                <Deposit/>
                 </div>
             </Route>
             <Route  >

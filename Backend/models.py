@@ -67,6 +67,8 @@ class WithDraw(models.Model):
     date = models.DateTimeField(auto_now=False, auto_now_add=False)
     pending = models.BooleanField(default=True)
     success= models.BooleanField(default=False)
+    chain_id= models.CharField(verbose_name="chain_id",max_length = 150)
+    status= models.CharField(verbose_name="status",max_length=150)
     
     
 
@@ -84,6 +86,9 @@ class Deposit(models.Model):
     date = models.DateTimeField(auto_now=False, auto_now_add=False)
     pending = models.BooleanField(default=True)
     success = models.BooleanField(default=False)
+    chain_id= models.CharField(verbose_name="chain_id",max_length = 150)
+    status= models.CharField(verbose_name="status",max_length=150)
+    
     
 
     def __str__(self):

@@ -18,9 +18,10 @@ export const SEND_MAIL = "SEND_MAIL";
 export const SET_SCREEN_SIZE = "SET_SCREEN_SIZE";
 export const GET_BTC_EXCHANGE = "GET_BTC_EXCHANGE";
 export const ADD_ERROR = "ADD_ERROR";
-export const REGISTER_USER ="RIGISTER_USER";
+export const REGISTER_USER = "RIGISTER_USER";
 export const GET_IP = "GET_IP";
-export const GET_ACCOUNT = "GET_ACCOUNT"
+export const GET_ACCOUNT = "GET_ACCOUNT";
+export const DEPOSIT = "DEPOSIT"
 
 //Actions dispatchers
 
@@ -114,7 +115,7 @@ export const getExchange = () => {
 }
 
 export const getIp = (config) => {
-    return axios.get('/api/dashboard',config).then(res => {
+    return axios.get('/api/dashboard', config).then(res => {
 
         return {
             type: GET_IP,
@@ -130,8 +131,8 @@ export const getIp = (config) => {
     })
 }
 
-export const DashBoard = (data,config,type) => {
-    return axios.post('/api/dashboard',data,config).then(res => {
+export const DashBoard = (data, config, type) => {
+    return axios.post('/api/dashboard', data, config).then(res => {
         switch (type) {
             case GET_ACCOUNT:
                 return {
@@ -139,8 +140,14 @@ export const DashBoard = (data,config,type) => {
                     withdraws: res.data.withdraws,
                     deposits: res.data.deposits,
                     account: res.data.account
+                }
+            case DEPOSIT:
+                return {
+                    type,
+                    url: res.data.url
+                }
         }
-        }}).catch(err => {
+    }).catch(err => {
         return {
             type: ADD_ERROR,
             data: err.response.data,
@@ -163,10 +170,10 @@ export const addComas = (input) => {
 
     const mutate = (array, result = []) => {
         if (array.length < 3) {
-            if(array!=""){
+            if (array != "") {
                 result.push(array)
             }
-            
+
             return
         }
 
@@ -182,16 +189,16 @@ export const addComas = (input) => {
     const [first, second] = input.split(".")
     const firstNum = mutate(first)
 
-    if(firstNum !=undefined){
-        
-    const firstHalf = firstNum.reverse().join(",")
+    if (firstNum != undefined) {
 
-    if (second == undefined) {
-        result = firstHalf
-    } else {
-        result = `${firstHalf}.${second}`
+        const firstHalf = firstNum.reverse().join(",")
+
+        if (second == undefined) {
+            result = firstHalf
+        } else {
+            result = `${firstHalf}.${second}`
+        }
     }
-}
 
 
     return result
@@ -205,21 +212,27 @@ const storeReducer = (state, action) => {
     console.log("dispatched", action)
     switch (action.type) {
         case REGISTER_USER:
-              return {
-                 ...state,
-                 User: action.data,
+            return {
+                ...state,
+                User: action.data,
                 messages: action.messages,
                 check: action.check,
                 logged: true,
                 loading: false,
-                }
+            }
         case GET_ACCOUNT:
-            return{
+            return {
                 ...state,
                 withdraws: action.withdraws,
                 deposits: action.deposits,
                 account: action.account,
-                loading:false,
+                loading: false,
+            }
+        case DEPOSIT:
+            return {
+                ...state,
+                url: action.url,
+                loading: false
             }
 
         case CLEAR_SUCCESS:
@@ -258,8 +271,8 @@ const storeReducer = (state, action) => {
                 messages: "",
                 loading: false,
                 logged: false,
-                check:false,
-                account:'',
+                check: false,
+                account: '',
             }
         case GET_BTC_EXCHANGE:
             return {
@@ -323,7 +336,7 @@ const StoreContextProvider = (props) => {
                         scrow: window.pageYOffset,
                         width: window.innerWidth,
                         btcexchange: { data: { currency: {}, rates: {} } },
-                        ip:"",
+                        ip: "",
                         withdraws: [],
                         deposits: [],
                         account: [],
@@ -342,7 +355,7 @@ const StoreContextProvider = (props) => {
                         scrow: window.pageYOffset,
                         width: window.innerWidth,
                         btcexchange: { data: { currency: {}, rates: {} } },
-                        ip:"",
+                        ip: "",
                         message: "",
                         status: "",
                         messages: "",
@@ -360,14 +373,14 @@ const StoreContextProvider = (props) => {
 
         useEffect(() => {
             const onresizer = () => {
-                    storedispatch({
-                        type: SET_SCREEN_SIZE,
-                        width: window.innerWidth,
-                        scrow: window.pageYOffset
-                    })
-                }
-                window.addEventListener('resize', onresizer)
-                window.addEventListener('scroll', onresizer)
+                storedispatch({
+                    type: SET_SCREEN_SIZE,
+                    width: window.innerWidth,
+                    scrow: window.pageYOffset
+                })
+            }
+            window.addEventListener('resize', onresizer)
+            window.addEventListener('scroll', onresizer)
 
             return () => {
 

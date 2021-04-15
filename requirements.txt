@@ -38,3 +38,4 @@ sqlparse
 uritemplate
 urllib3
 whitenoise
+coinbase_commerce
