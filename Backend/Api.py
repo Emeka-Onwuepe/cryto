@@ -93,7 +93,7 @@ class DashBoard(generics.GenericAPIView):
             deposit= Deposit.objects.create(amount=recieved["amount"],date=charge["created_at"],
             chain_id=charge["id"],status=charge['timeline'][0]['status'],url=charge["hosted_url"],packages=recieved['packages'])
             deposit=deposit.save()
-            account.deposit_history.add(deposit)
+            account.deposit_history.add(int(deposit.id))
             return Response({"url":charge["hosted_url"]})
         if action == "GET_TRANSACTIONS":
             account= Accounts.objects.get(account=int(request.user.id))
