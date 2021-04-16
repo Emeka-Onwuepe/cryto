@@ -44,3 +44,4 @@ charge_info= {'name': 'FutexInvest',
 'pricing_type': 'fixed_price'}
 charge = client.charge.create(**charge_info)
 print(charge["hosted_url"])
+print(charge["id"])
