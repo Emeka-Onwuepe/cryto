@@ -87,15 +87,21 @@ class DashBoard(generics.GenericAPIView):
                 "pricing_type": "fixed_price"
 
             }
-            print(charge_info)
             API_KEY = os.environ.get("API_KEY")
             client = Client(api_key=API_KEY)
-            print(client)
             charge = client.charge.create(**charge_info)
-            print(charge)
             deposit= Deposit.objects.create(amount=recieved["amount"],date=charge["created_at"],
-            chain_id=charge["id"],status=charge['timeline'][0]['status'])
+            chain_id=charge["id"],status=charge['timeline'][0]['status'],url=charge["hosted_url"],packages=recieved['packages'])
             deposit=deposit.save()
+            account.deposit_history.add(deposit)
             return Response({"url":charge["hosted_url"]})
+        if action == "GET_TRANSACTIONS":
+            account= Accounts.objects.get(account=int(request.user.id))
+            deposit= account.deposit_history
+            withdraw = account.withdraw_history
+            depositSerial=DepositSerializer(deposit,many=True)
+            withdrawSerial= WithDrawSerializer(withdraw,many=True)
+            return Response({"deposits":depositSerial.data,"withdraws":withdrawSerial.data})
+
 
 

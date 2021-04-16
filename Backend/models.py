@@ -69,6 +69,8 @@ class WithDraw(models.Model):
     success= models.BooleanField(default=False)
     chain_id= models.CharField(verbose_name="chain_id",max_length = 150)
     status= models.CharField(verbose_name="status",max_length=150)
+    url=models.CharField(verbose_name="url",max_length=200)
+    packages= models.CharField(verbose_name="packages",default="BASIC",max_length = 150)
     
     
 
@@ -88,6 +90,8 @@ class Deposit(models.Model):
     success = models.BooleanField(default=False)
     chain_id= models.CharField(verbose_name="chain_id",max_length = 150)
     status= models.CharField(verbose_name="status",max_length=150)
+    url=models.CharField(verbose_name="url",max_length=200)
+    packages= models.CharField(verbose_name="packages",default="BASIC",max_length=150)
     
     
 

@@ -33,15 +33,14 @@ charge_info = {
         "amount": "1.00",
         "currency": "USD"
     },
-    "pricing_type": "fixed_price"
+    "pricing_type": "fixed_price",
+    "requested_info": ["name", "email"]
 
 }
 
-charge_info= {'name': 'FutexInvest', 
-'metadata': {'name': 'EMEKA ONWUEPE', 'email': 'pascalemy2000@gmail.com'}, 
-'description': 'Payment for BASIC package', 
-'local_price': {'amount': '1', 'currency': 'USD'}, 
-'pricing_type': 'fixed_price'}
-charge = client.charge.create(**charge_info)
-print(charge["hosted_url"])
+charge = client.checkout.create(**charge_info)
+id=charge["id"]
+checkout = client.checkout.retrieve(id)
+print(checkout)
+print(charge)
 print(charge["id"])

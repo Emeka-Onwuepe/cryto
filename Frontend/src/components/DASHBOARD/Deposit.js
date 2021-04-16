@@ -6,6 +6,7 @@ import "../../CSS/form.css"
 
 function Deposit(props) {
     const { storestate, storedispatch } = useContext(storeContext);
+    const{url,newPayment} = storedispatch
     const [formState, setformState] = useState({amount:"",packages:""})
     const {amount,packages} = formState
     const onChange=(e)=>{
@@ -22,6 +23,9 @@ function Deposit(props) {
     useEffect(() => {
     }, [formState]);
 
+    if(newPayment){
+        return <Redirect to="/dashboard"/>
+    }
     
     return (
         <div>

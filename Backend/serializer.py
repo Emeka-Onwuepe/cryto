@@ -35,12 +35,12 @@ class LoginSerializer(serializers.Serializer):
 class DepositSerializer(serializers.ModelSerializer):
     class Meta:
         model=Deposit
-        fields= "__all__"
+        exclude=["chain_id"]
 
 class WithDrawSerializer(serializers.ModelSerializer):
     class Meta:
         model=WithDraw
-        fields= "__all__"
+        exclude=["chain_id"]
 
 class AccountSerializer(serializers.ModelSerializer):
     class Meta:

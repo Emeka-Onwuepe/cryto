@@ -22,6 +22,7 @@ export const REGISTER_USER = "RIGISTER_USER";
 export const GET_IP = "GET_IP";
 export const GET_ACCOUNT = "GET_ACCOUNT";
 export const DEPOSIT = "DEPOSIT"
+export const GET_TRANSACTIONS = "GET_TRANSACTIONS"
 
 //Actions dispatchers
 
@@ -146,6 +147,18 @@ export const DashBoard = (data, config, type) => {
                     type,
                     url: res.data.url
                 }
+            case GET_TRANSACTIONS:
+                const withdraws = res.data.withdraws
+                const deposits = res.data.deposits
+                const pendingdeposits = deposits.length > 0 ? deposits.filter(item => item.pending == true) : []
+                const transactions = deposits.concat(withdraws)
+                return {
+                    type,
+                    withdraws,
+                    deposits,
+                    pendingdeposits,
+                    transactions
+                }
         }
     }).catch(err => {
         return {
@@ -232,6 +245,7 @@ const storeReducer = (state, action) => {
             return {
                 ...state,
                 url: action.url,
+                newPayment: true,
                 loading: false
             }
 
@@ -341,6 +355,7 @@ const StoreContextProvider = (props) => {
                         deposits: [],
                         account: [],
                         url: "",
+                        newPayment: false,
                         ...jsonify,
                         message: "",
                         status: "",
@@ -364,6 +379,7 @@ const StoreContextProvider = (props) => {
                         deposits: [],
                         account: [],
                         url: "",
+                        newPayment: false,
                     }
                 }
                 return finaldata

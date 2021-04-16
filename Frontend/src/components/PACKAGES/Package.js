@@ -2,15 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import "../../CSS/package.css"
 import { NavLink } from 'react-router-dom'
-
-
-import CoinbaseCommerceButton from "react-coinbase-commerce"
-import "react-coinbase-commerce/dist/coinbase-commerce-button.css"
-
 function Package(props) {
   return (
     <div id="packages">
-    <CoinbaseCommerceButton chargeId={"e6c1115a-9aa0-4c33-97fd-fdb34e654163"}/>
+    <CoinbaseCommerceButton checkoutId={"e6c1115a-9aa0-4c33-97fd-fdb34e654163"}/>
             <div className="flip-card-front">
             <h3>BASIC</h3>
             <p><strong>$100</strong> Min Invest</p>
