@@ -1,0 +1,18 @@
+td,
+th {
+    color: white;
+    padding: 5px;
+    text-align: center;
+}
+
+th {
+    border: 2px solid white
+}
+
+td {
+    border-bottom: 2px solid white;
+}
+
+table button {
+    padding: 5px;
+}

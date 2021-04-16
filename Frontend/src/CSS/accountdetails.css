@@ -2,7 +2,8 @@
     background-color: #111111;
     padding: 25px 25px 10px 25px;
     flex: 1;
-    flex-basis: 300px;
+    flex-basis: 365px;
+    text-align: center
 }
 
 .accountDetails p {

@@ -23,14 +23,17 @@ a,
 button,
 li,
 input,
-label {
+label,
+td,
+th {
     font-size: 17px;
     letter-spacing: 1px;
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
 }
 
-label {
+label,
+th {
     font-weight: 500;
 }
 
@@ -91,7 +94,9 @@ h1 {
     button,
     li,
     input,
-    label {
+    label,
+    td,
+    th {
         font-size: 18px;
     }
     h3,
@@ -118,7 +123,9 @@ h1 {
     button,
     li,
     input,
-    label {
+    label,
+    td,
+    th {
         font-size: 19px;
     }
     h3,

@@ -5,7 +5,6 @@ import { NavLink } from 'react-router-dom'
 function Package(props) {
   return (
     <div id="packages">
-    <CoinbaseCommerceButton checkoutId={"e6c1115a-9aa0-4c33-97fd-fdb34e654163"}/>
             <div className="flip-card-front">
             <h3>BASIC</h3>
             <p><strong>$100</strong> Min Invest</p>

@@ -3,4 +3,5 @@
     padding: 25px 25px 10px 25px;
     flex: 2;
     flex-basis: 300px;
+    justify-self: center;
 }

@@ -320,6 +320,16 @@ const storeReducer = (state, action) => {
                 screenWidth: action.width,
                 scrow: action.scrow,
             }
+        case GET_TRANSACTIONS:
+            return {
+                ...state,
+                withdraws: action.withdraws,
+                deposits: action.deposits,
+                pendingdeposits: action.pendingdeposits,
+                transactions: action.transactions,
+                newPayment: false,
+                loading: false,
+            }
 
         default:
             return {
@@ -351,11 +361,13 @@ const StoreContextProvider = (props) => {
                         width: window.innerWidth,
                         btcexchange: { data: { currency: {}, rates: {} } },
                         ip: "",
-                        withdraws: [],
-                        deposits: [],
                         account: [],
                         url: "",
                         newPayment: false,
+                        withdraws: [],
+                        deposits: [],
+                        pendingdeposits: [],
+                        transactions: [],
                         ...jsonify,
                         message: "",
                         status: "",
@@ -375,11 +387,13 @@ const StoreContextProvider = (props) => {
                         message: "",
                         status: "",
                         messages: "",
-                        withdraws: [],
-                        deposits: [],
                         account: [],
                         url: "",
                         newPayment: false,
+                        withdraws: [],
+                        deposits: [],
+                        pendingdeposits: [],
+                        transactions: [],
                     }
                 }
                 return finaldata

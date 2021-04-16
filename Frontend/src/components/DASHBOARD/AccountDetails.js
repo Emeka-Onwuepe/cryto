@@ -11,7 +11,7 @@ function AccountDetails(props) {
         const data = { "action": "GET_ACCOUNT" }
         const data2 = { "action": "GET_TRANSACTIONS" }
         DashBoard(data, config, GET_ACCOUNT).then(res => storedispatch(res))
-        DashBoard(data2, config, GET_TRANSACTIONS).then(res => console.log(res))
+        DashBoard(data2, config, GET_TRANSACTIONS).then(res => storedispatch(res))
 
     }, []);
 

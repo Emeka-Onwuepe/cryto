@@ -21,7 +21,7 @@ function Deposit(props) {
     }
 
     useEffect(() => {
-    }, [formState]);
+    }, [formState,newPayment]);
 
     if(newPayment){
         return <Redirect to="/dashboard"/>
