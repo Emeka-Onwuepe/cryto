@@ -340,6 +340,7 @@ const StoreContextProvider = (props) => {
                         withdraws: [],
                         deposits: [],
                         account: [],
+                        url: "",
                         ...jsonify,
                         message: "",
                         status: "",
@@ -362,6 +363,7 @@ const StoreContextProvider = (props) => {
                         withdraws: [],
                         deposits: [],
                         account: [],
+                        url: "",
                     }
                 }
                 return finaldata

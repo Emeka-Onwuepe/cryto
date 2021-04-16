@@ -1,6 +1,9 @@
 from coinbase.wallet.client import Client
+import os
 
 from coinbase_commerce.client import Client
+
+API_KEY = os.environ.get("API_KEY")
 
 client = Client(api_key=API_KEY)
 

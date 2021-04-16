@@ -15,6 +15,7 @@ import Login from "./ACCOUNT/Login"
 import Dashboard from './DASHBOARD/Dashboard';
 import DashBoardNav from './HEADER/DashBoardNav';
 import Deposit from './DASHBOARD/Deposit';
+import Payment from './DASHBOARD/Payment';
 
 
 const Routes = ({ component: component, ...rest }) => {
@@ -68,6 +69,11 @@ const Routes = ({ component: component, ...rest }) => {
             <Route exact path='/dashboard/deposit' >
                 <div className="wrapper">
                 <Deposit/>
+                </div>
+            </Route>
+            <Route exact path='/dashboard/payment' >
+                <div className="wrapper">
+                <Payment/>
                 </div>
             </Route>
             <Route  >
