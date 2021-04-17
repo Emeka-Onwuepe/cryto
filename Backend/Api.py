@@ -111,6 +111,7 @@ class WebhookApi(generics.GenericAPIView):
     serializer_class=DepositSerializer
     
     def post(self, request, *args, **kwargs):
+        WEBHOOK_SECRET = os.environ.get("WEB_SECRET")
         request_data = request.data.decode('utf-8')
         # webhook signature
         request_sig = request.headers.get('X-CC-Webhook-Signature', None)
