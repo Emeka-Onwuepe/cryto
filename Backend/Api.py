@@ -112,7 +112,7 @@ class WebhookApi(generics.GenericAPIView):
     
     def post(self, request, *args, **kwargs):
         WEBHOOK_SECRET = os.environ.get("WEB_SECRET")
-        request_data = request.data.decode('utf-8')
+        request_data = request.body
         # webhook signature
         request_sig = request.headers.get('X-CC-Webhook-Signature', None)
         event=""
