@@ -118,8 +118,7 @@ class WebhookApi(generics.GenericAPIView):
         try:
             # signature verification and event object construction
             event = Webhook.construct_event(request_data, request_sig, WEBHOOK_SECRET)
-            chid='b3826fab-9b9a-4a5e-8d7c-8efbb3470824'
-            deposit = Deposit.objects.get(chain_id=chid)
+            deposit = Deposit.objects.get(chain_id=event.id)
             charge,chargeStatus = event.type.split(":")
             if event.type == "charge:confirmed":
                 deposit.pending = False
@@ -135,6 +134,6 @@ class WebhookApi(generics.GenericAPIView):
         except (WebhookInvalidPayload, SignatureVerificationError) as e:
             content={"Access denied":"Access Denied, please request for access from the appropriate body"}
             return Response(content,status=status.HTTP_403_FORBIDDEN)
-        return Response({"id":chid,"type":event.type})
+        return Response({"id":event.id,"type":event.type})
 
     
