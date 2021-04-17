@@ -119,7 +119,7 @@ class WebhookApi(generics.GenericAPIView):
             # signature verification and event object construction
             event = Webhook.construct_event(request_data, request_sig, WEBHOOK_SECRET)
             chid='b3826fab-9b9a-4a5e-8d7c-8efbb3470824'
-            depost = Deposit.objects.get(chain_id=chid)
+            deposit = Deposit.objects.get(chain_id=chid)
             charge,chargeStatus = event.type.split(":")
             if event.type == "charge:confirmed":
                 deposit.pending = True
