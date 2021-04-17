@@ -11,6 +11,8 @@ GetUserSerializer,UserSerializer,LoginSerializer)
 from knox.models import AuthToken
 from datetime import timedelta
 from coinbase_commerce.client import Client
+from coinbase_commerce.error import WebhookInvalidPayload, SignatureVerificationError
+from coinbase_commerce.webhook import Webhook
 
 
 class RegisterUser(generics.GenericAPIView):
@@ -89,11 +91,12 @@ class DashBoard(generics.GenericAPIView):
             }
             API_KEY = os.environ.get("API_KEY")
             client = Client(api_key=API_KEY)
-            charge = client.charge.create(**charge_info)
-            deposit= Deposit.objects.create(amount=recieved["amount"],date=charge["created_at"],
-            chain_id=charge["id"],status=charge['timeline'][0]['status'],url=charge["hosted_url"],packages=recieved['packages'])
-            account.deposit_history.add(deposit)
-            return Response({"url":charge["hosted_url"]})
+            # charge = client.charge.create(**charge_info)
+            # deposit= Deposit.objects.create(amount=recieved["amount"],date=charge["created_at"],
+            # chain_id=charge["id"],status=charge['timeline'][0]['status'],url=charge["hosted_url"],packages=recieved['packages'])
+            # account.deposit_history.add(deposit)
+            # return Response({"url":charge["hosted_url"]})
+            return Response({"url":"www.google.com"})
         if action == "GET_TRANSACTIONS":
             account= Accounts.objects.get(account=int(request.user.id))
             deposit= account.deposit_history
@@ -104,3 +107,19 @@ class DashBoard(generics.GenericAPIView):
 
 
 
+class WebhookApi(generics.GenericAPIView):
+    
+    def post(self, request, *args, **kwargs):
+        request_data = request.data.decode('utf-8')
+        # webhook signature
+        request_sig = request.headers.get('X-CC-Webhook-Signature', None)
+        event=""
+        try:
+            # signature verification and event object construction
+            event = Webhook.construct_event(request_data, request_sig, WEBHOOK_SECRET)
+        except (WebhookInvalidPayload, SignatureVerificationError) as e:
+            content={"Access denied":"Access Denied, please request for access from the appropriate body"}
+            return Response(content,status=status.HTTP_403_FORBIDDEN)
+        return Response({"id":event.id,"type":event.type})
+
+    

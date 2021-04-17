@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import PackageCopy from '../PACKAGES/packageCopy'
 import { storeContext,DashBoard,DEPOSIT} from '../../State/State';
 import "../../CSS/form.css"
-
+import { Redirect } from 'react-router';
 function Deposit(props) {
     const { storestate, storedispatch } = useContext(storeContext);
-    const{url,newPayment} = storedispatch
+    const{url,newPayment} = storestate
     const [formState, setformState] = useState({amount:"",packages:""})
     const {amount,packages} = formState
     const onChange=(e)=>{
