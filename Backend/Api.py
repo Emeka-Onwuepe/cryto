@@ -122,7 +122,7 @@ class WebhookApi(generics.GenericAPIView):
             deposit = Deposit.objects.get(chain_id=chid)
             charge,chargeStatus = event.type.split(":")
             if event.type == "charge:confirmed":
-                deposit.pending = True
+                deposit.pending = False
                 deposit.success = True
                 deposit.status = chargeStatus
                 deposit.save()
