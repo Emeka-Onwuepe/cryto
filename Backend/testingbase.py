@@ -1,11 +1,11 @@
-from coinbase.wallet.client import Client
-import os
+# from coinbase.wallet.client import Client
+# import os
 
-from coinbase_commerce.client import Client
+# from coinbase_commerce.client import Client
 
-API_KEY = os.environ.get("API_KEY")
+# API_KEY = os.environ.get("API_KEY")
 
-client = Client(api_key=API_KEY)
+# client = Client(api_key=API_KEY)
 
 # checkout_info = {
 #     "name": 'The Sovereign Individual',
@@ -37,8 +37,14 @@ charge_info = {
 
 }
 
-charge = client.charge.create(**charge_info)
-id=charge["id"]
+# charge = client.charge.create(**charge_info)
+# id=charge["id"]
 
-print(charge)
-print(charge["id"])
+# print(charge)
+# print(charge["id"])
+
+
+string = "charge:created"
+string2 = "0.01"
+
+print(float(string2))

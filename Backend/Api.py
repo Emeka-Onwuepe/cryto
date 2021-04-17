@@ -91,12 +91,11 @@ class DashBoard(generics.GenericAPIView):
             }
             API_KEY = os.environ.get("API_KEY")
             client = Client(api_key=API_KEY)
-            # charge = client.charge.create(**charge_info)
-            # deposit= Deposit.objects.create(amount=recieved["amount"],date=charge["created_at"],
-            # chain_id=charge["id"],status=charge['timeline'][0]['status'],url=charge["hosted_url"],packages=recieved['packages'])
-            # account.deposit_history.add(deposit)
-            # return Response({"url":charge["hosted_url"]})
-            return Response({"url":"www.google.com"})
+            charge = client.charge.create(**charge_info)
+            deposit= Deposit.objects.create(amount=recieved["amount"],date=charge["created_at"],
+            chain_id=charge["id"],status=charge['timeline'][0]['status'],url=charge["hosted_url"],packages=recieved['packages'])
+            account.deposit_history.add(deposit)
+            return Response({"url":charge["hosted_url"]})
         if action == "GET_TRANSACTIONS":
             account= Accounts.objects.get(account=int(request.user.id))
             deposit= account.deposit_history
@@ -119,6 +118,19 @@ class WebhookApi(generics.GenericAPIView):
         try:
             # signature verification and event object construction
             event = Webhook.construct_event(request_data, request_sig, WEBHOOK_SECRET)
+            depost = Deposit.objects.get(chain_id=event.id)
+            charge,chargeStatus = event.type.split(":")
+            if event.type == "charge:confirmed":
+                deposit.pending = True
+                deposit.success = True
+                deposit.status = chargeStatus
+                deposit.save()
+                account = Accounts.objects.get(deposit_history=int(deposit.id))
+                account.amount = float(account.amount) + float(deposit.amount)
+                account.save()
+            else:
+                deposit.status = chargeStatus
+                deposit.save() 
         except (WebhookInvalidPayload, SignatureVerificationError) as e:
             content={"Access denied":"Access Denied, please request for access from the appropriate body"}
             return Response(content,status=status.HTTP_403_FORBIDDEN)
