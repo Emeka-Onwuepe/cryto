@@ -108,6 +108,7 @@ class DashBoard(generics.GenericAPIView):
 
 
 class WebhookApi(generics.GenericAPIView):
+    serializer_class=DepositSerializer
     
     def post(self, request, *args, **kwargs):
         request_data = request.data.decode('utf-8')
